@@ -1,17 +1,28 @@
-import java.util.ArrayList;
-import java.util.Collections;
+import java.util.*;
 
-public class Chocolate_Distribution {
+class Chocolate_Distribution {
     public long findMinDiff(ArrayList<Integer> a, int n, int m) {
-        Collections.sort(a);
-        int min = a.get(n - 1);
+        // your code here
 
-        for (int i = 0; i < n - m + 1; i++) {
-            int diff = a.get(m - 1 + i) - a.get(0 + i);
-            if (diff < min) {
-                min = diff;
+        if (m == 0 || n == 0) {
+            return 0;
+        }
+
+        Collections.sort(a);
+
+        int minDiff = Integer.MAX_VALUE;
+
+        if (n < m) {
+            return -1;
+        }
+
+        for (int i = 0; i + m - 1 < n; i++) {
+            int diff = a.get(i + m - 1) - a.get(i);
+            if (diff < minDiff) {
+                minDiff = diff;
             }
         }
-        return min;
+
+        return minDiff;
     }
 }
